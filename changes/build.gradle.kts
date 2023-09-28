@@ -4,7 +4,7 @@ plugins {
     id("tz.co.asoft.library")
 }
 
-description = "A kotlin multiplatform library for representing charts and graphs"
+description = "A kotlin multiplatform library for representing changes"
 
 kotlin {
     jvm { library() }

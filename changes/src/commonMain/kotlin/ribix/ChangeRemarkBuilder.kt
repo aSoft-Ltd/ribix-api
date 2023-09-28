@@ -4,7 +4,6 @@
 package ribix
 
 import kash.Money
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
@@ -24,23 +23,23 @@ fun changeRemarkOf(
     val diff = current - previous
 
     return when {
-        previous.amount == 0 && diff.amount < 0 -> ChangeRemark.Decrease(
+        previous.amountAsDouble == 0.0 && diff.amountAsDouble < 0 -> ChangeRemark.Decrease(
             pct = Percentage.ONE_HUNDRED,
             value = diff * -1,
             feeling = decreaseFeeling ?: ChangeRemark.Decrease.DEFAULT_FEELING
         )
-        previous.amount != 0 && diff.amount < 0 -> ChangeRemark.Decrease(
-            pct = Percentage.fromRatio(diff.amount * -1.0 / previous.amount),
+        previous.amountAsDouble != 0.0 && diff.amountAsDouble < 0 -> ChangeRemark.Decrease(
+            pct = Percentage.fromRatio(diff.amountAsDouble * -1.0 / previous.amountAsDouble),
             value = diff * -1,
             feeling = decreaseFeeling ?: ChangeRemark.Decrease.DEFAULT_FEELING
         )
-        previous.amount == 0 && diff.amount > 0 -> ChangeRemark.Increase(
+        previous.amountAsDouble == 0.0 && diff.amountAsDouble > 0 -> ChangeRemark.Increase(
             pct = Percentage.ONE_HUNDRED,
             value = diff,
             feeling = increaseFeeling ?: ChangeRemark.Increase.DEFAULT_FEELING
         )
-        previous.amount != 0 && diff.amount > 0 -> ChangeRemark.Increase(
-            pct = Percentage.fromRatio(diff.amount.toDouble() / previous.amount),
+        previous.amountAsDouble != 0.0 && diff.amountAsDouble > 0 -> ChangeRemark.Increase(
+            pct = Percentage.fromRatio(diff.amountAsDouble / previous.amountAsDouble),
             value = diff,
             feeling = increaseFeeling ?: ChangeRemark.Increase.DEFAULT_FEELING
         )
