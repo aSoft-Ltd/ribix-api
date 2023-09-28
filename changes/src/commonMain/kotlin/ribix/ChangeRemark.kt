@@ -3,7 +3,6 @@
 
 package ribix
 
-import presenters.numerics.Percentage
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
